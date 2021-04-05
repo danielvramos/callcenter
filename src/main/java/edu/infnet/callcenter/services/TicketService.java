@@ -23,6 +23,9 @@ public class TicketService {
 
 	public TicketDTO update(TicketDTO ticket, Long id) {
 		ticket.setId(id);
+
+		if(null == ticket.getUser_id()) return null;
+
 		return tr.save(ticket);
 	}
 
