@@ -19,37 +19,39 @@ import edu.infnet.callcenter.services.ClientService;
 @RestController 
 @RequestMapping("/clients")
 public class ClientController {
-	
+
 	@Autowired
 	private ClientService cs;
-	
+
 	@GetMapping
 	public List<ClientDTO> getClients(){
 		return cs.getAll();
-		}
+	}
 
 	@PostMapping
 	public ClientDTO storeClient(@RequestBody ClientDTO client) {
 		return cs.save(client);
 	}
-	
+
 	@PatchMapping("/{id}")
 	public ClientDTO patchClient(@RequestBody ClientDTO client, @PathVariable Long id) {
 		if(!cs.exists(id)) return null;
-		
+
 		return cs.update(client, id);
 	}
+
 	@GetMapping("/{id}")
 	public ClientDTO getClient (@PathVariable Long id) {
 		Optional<ClientDTO> client = cs.getById(id);
 		if(client.isEmpty())return null;
+
 		return client.get();
 	}
+
 	@DeleteMapping("/{id}")
 	public Optional<ClientDTO> deleteClient(@PathVariable Long id){
 		if(!cs.exists(id)) return null; 
-				
+	
 		return cs.deleteById(id);
-	}		
 	}
-
+}

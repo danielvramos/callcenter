@@ -12,10 +12,11 @@ public class ProductDTO {
 	private long id;
     private String serial_number;
     private String name;
+
     public ProductDTO() {
-    	
+
     }
-    
+
     public ProductDTO(String serial_number, String name) {
     	this.serial_number = serial_number;
     	this.name = name;
@@ -35,6 +36,5 @@ public class ProductDTO {
 
 	public void setId(Long id) {
 		this.id = id;
-		
 	}
 }

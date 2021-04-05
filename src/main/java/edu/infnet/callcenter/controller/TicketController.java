@@ -22,38 +22,36 @@ public class TicketController {
 
 	@Autowired
 	private TicketService ts;
-	
+
 	@GetMapping
 	public List<TicketDTO> getTickets(){
 		return ts.getAll();
 	}
-	
+
 	@PostMapping
 	public TicketDTO storeTicket(@RequestBody TicketDTO ticket) {
 		return ts.save(ticket);
 	}
-	
+
 	@PatchMapping("/{id}")
 	public TicketDTO patchTicket(@RequestBody TicketDTO ticket, @PathVariable Long id) {
 		if(!ts.exists(id)) return null;
-		
-			
+
 		return ts.update(ticket, id);
 	}
-	
+
 	@GetMapping("/{id}")
 	public TicketDTO getTicket(@PathVariable Long id) {
 		Optional<TicketDTO> ticket = ts.getById(id);
 		if(ticket.isEmpty()) return null;
-		
+
 		return ticket.get();
 	}
-	
-    @DeleteMapping("/{id}")
 
+    @DeleteMapping("/{id}")
 	public Optional<TicketDTO> deteleTicket(@PathVariable Long id){
 		if(!ts.exists(id)) return null;
-		
+
 		return ts.deleteById(id);
 	}
 }

@@ -3,15 +3,13 @@ package edu.infnet.callcenter.services;
 import edu.infnet.callcenter.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import edu.infnet.callcenter.dto.UserDTO;
 
 @Service
 public class UserService {
-    
+
     @Autowired
     public UserRepository userRepository;
 
