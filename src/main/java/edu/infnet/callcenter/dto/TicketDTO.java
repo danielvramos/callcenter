@@ -110,8 +110,6 @@ public class TicketDTO {
 
 
 
-
-
 	@ManyToOne(optional=true, fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id", referencedColumnName="id", insertable=false, updatable=false)
 	private UserDTO users;
