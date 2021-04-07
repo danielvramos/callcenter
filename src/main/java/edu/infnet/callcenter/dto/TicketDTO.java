@@ -56,81 +56,61 @@ public class TicketDTO {
 		return user_id;
 	}
 
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
-	}
+
 
 	public Long getSerial_number() {
 		return serial_number;
 	}
 
-	public void setSerial_number(Long serial_number) {
-		this.serial_number = serial_number;
-	}
+
 
 	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public String getClient_name() {
 		return client_name;
 	}
 
-	public void setClient_name(String client_name) {
-		this.client_name = client_name;
-	}
+
 
 	public String getBriefing() {
 		return briefing;
 	}
 
-	public void setBriefing(String briefing) {
-		this.briefing = briefing;
-	}
 
 	public String getError_code() {
 		return error_code;
 	}
 
-	public void setError_code(String error_code) {
-		this.error_code = error_code;
-	}
+
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+
 
 	public Boolean getFinished() {
 		return finished;
 	}
 
-	public void setFinished(Boolean finished) {
-		this.finished = finished;
-	}
+
 
 	public Timestamp getCreated_at() {
 		return created_at;
 	}
 
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
-	}
+
 
 	public Timestamp getUpdated_at() {
 		return updated_at;
 	}
 
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
-	}
+
+
+
 
 	@ManyToOne(optional=true, fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id", referencedColumnName="id", insertable=false, updatable=false)
