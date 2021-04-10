@@ -30,7 +30,9 @@ public class ClientService {
 	public Optional<ClientDTO> getById(Long id) {
 		return cr.findById(id);
 	}
-
+	public List<ClientDTO> getByCpf(String cpf) {
+		return cr.findByCpf(cpf);
+	}
 	public Optional<ClientDTO> deleteById(Long id) {
 		Optional<ClientDTO> client = cr.findById(id);
 		cr.deleteById(id);

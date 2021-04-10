@@ -1,5 +1,6 @@
 package edu.infnet.callcenter.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ import edu.infnet.callcenter.services.ClientsProductsService;
 import edu.infnet.callcenter.services.ProductService;
 
 @RestController 
-@RequestMapping("/addproducts")
+@RequestMapping("/clientsproducts")
 public class ClientsProductsController {
 
 	@Autowired
@@ -31,10 +32,16 @@ public class ClientsProductsController {
 	@Autowired
 	private ClientsProductsService cps;
 	
-	@GetMapping("/{id}")
-	public List<ClientsProductsDTO> getProductsByClients(@PathVariable Long id){
-		ClientDTO client = cs.getById(id).get();
-		return cps.getAllByClient(client);
+
+	@GetMapping("cpf/{cpf}")
+	public List<ProductDTO> getProductsByCPF(@PathVariable String cpf){
+		ClientDTO client = cs.getByCpf(cpf).get(0);
+		List<ProductDTO> ProductList = new ArrayList();
+		for (ClientsProductsDTO clientProduct : cps.getAllByClient(client)){
+			ProductList.add(clientProduct.getProduct());
+		}
+		
+		return ProductList;
 	}
 
 	
