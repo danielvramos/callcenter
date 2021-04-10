@@ -14,51 +14,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.infnet.callcenter.dto.ClientDTO;
+import edu.infnet.callcenter.dto.ClientsProductsDTO;
 import edu.infnet.callcenter.dto.ProductDTO;
 import edu.infnet.callcenter.services.ClientService;
+import edu.infnet.callcenter.services.ClientsProductsService;
 import edu.infnet.callcenter.services.ProductService;
 
 @RestController 
-@RequestMapping("/clients")
-public class ClientController {
+@RequestMapping("/addproducts")
+public class ClientsProductsController {
 
 	@Autowired
 	private ClientService cs;
-	@Autowired
+	@Autowired 
 	private ProductService ps;
+	@Autowired
+	private ClientsProductsService cps;
 	
-	@GetMapping
-	public List<ClientDTO> getClients(){
-		return cs.getAll();
-	}
-
-	@PostMapping
-	public ClientDTO storeClient(@RequestBody ClientDTO client) {
-		return cs.save(client);
-	}
-
-	@PatchMapping("/{id}")
-	public ClientDTO patchClient(@RequestBody ClientDTO client, @PathVariable Long id) {
-		if(!cs.exists(id)) return null;
-
-		return cs.update(client, id);
-	}
-
-
 	@GetMapping("/{id}")
-	public ClientDTO getClient (@PathVariable Long id) {
-		Optional<ClientDTO> client = cs.getById(id);
-		if(client.isEmpty())return null;
-
-		return client.get();
+	public List<ClientsProductsDTO> getProductsByClients(@PathVariable Long id){
+		ClientDTO client = cs.getById(id).get();
+		return cps.getAllByClient(client);
 	}
 
+	
+	@PatchMapping("/{id_client}/{id_product}")
+	public ClientsProductsDTO addProduct (@PathVariable Long id_client, @PathVariable Long id_product) {
+		if(!ps.exists(id_product) || !cs.exists(id_client) ) return null;
+		
+		ClientsProductsDTO clients_products = new ClientsProductsDTO(cs.getById(id_client).get(),ps.getById(id_product).get() );
+
+		return cps.add(clients_products);
+	}
+	
 	@DeleteMapping("/{id}")
-	public Optional<ClientDTO> deleteClient(@PathVariable Long id){
-		if(!cs.exists(id)) return null; 
-	
-		return cs.deleteById(id);
+	public Optional<ClientsProductsDTO> removeProduct(@PathVariable Long id) {
+		if(!cps.exists(id)) return null;	
+		return cps.deleteById(id);
 	}
-	
-	
 }

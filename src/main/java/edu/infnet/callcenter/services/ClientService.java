@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import edu.infnet.callcenter.dto.ClientDTO;
+import edu.infnet.callcenter.dto.ProductDTO;
 import edu.infnet.callcenter.repository.ClientRepository;
 
 @Service
@@ -39,4 +40,5 @@ public class ClientService {
 	public Boolean exists(Long id) {
 		return cr.existsById(id);
 	}
+	
 }

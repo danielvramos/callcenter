@@ -1,8 +1,20 @@
 package edu.infnet.callcenter.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class ClientDTO  {
@@ -61,4 +73,12 @@ public class ClientDTO  {
 	public String getCelular() {
 		return celular;
 	}
+	
+	@OneToMany(mappedBy="client", cascade = CascadeType.ALL)
+	private Collection<ClientsProductsDTO> products;
+
+
+	
+	
+
 }
