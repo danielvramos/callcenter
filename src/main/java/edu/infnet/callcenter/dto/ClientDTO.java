@@ -1,6 +1,7 @@
 package edu.infnet.callcenter.dto;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -37,9 +38,13 @@ public class ClientDTO {
 		this.updated_at = updated_at;
 	}
 
-	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-	private Collection<ClientsProductsDTO> products;
+	@OneToMany(targetEntity = ClientProductDTO.class, mappedBy = "client", cascade = CascadeType.ALL)
+	private Collection<ClientProductDTO> products = new ArrayList<>();
 
+	public Collection<ClientProductDTO> getProducts() {
+        return products;
+    }
+	
 	public Long getId() {
 		return id;
 	}
