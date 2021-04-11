@@ -2,12 +2,16 @@ package edu.infnet.callcenter.dto;
 
 import java.sql.Timestamp;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import edu.infnet.callcenter.Enum.StatusEnum;
 
 @Entity
 @Table(name="tickets")
@@ -18,7 +22,8 @@ public class TicketDTO {
 	private Long id;
 	private Long user_id;
 	private Long serial_number;
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private StatusEnum status;
 	private String client_name;
 	private String briefing;
 	private String error_code;
@@ -31,18 +36,7 @@ public class TicketDTO {
 
 	}
 
-	public TicketDTO(Long serial_number, String status, String client_name, String briefing, String error_code,
-			String description, Boolean finished, Timestamp created_at, Timestamp updated_at) {
-		this.serial_number = serial_number;
-		this.status = status;
-		this.client_name = client_name;
-		this.briefing = briefing;
-		this.error_code = error_code;
-		this.description = description;
-		this.finished = finished;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -64,7 +58,7 @@ public class TicketDTO {
 
 
 
-	public String getStatus() {
+	public StatusEnum getStatus() {
 		return status;
 	}
 
@@ -106,6 +100,18 @@ public class TicketDTO {
 
 	public Timestamp getUpdated_at() {
 		return updated_at;
+	}
+
+
+
+	public void setStatus(StatusEnum status) {
+		this.status = status;
+	}
+
+
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
 	}
 
 
