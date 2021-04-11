@@ -29,7 +29,7 @@ public class ProductDTO {
 	}
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private Collection<ClientsProductsDTO> products;
+	private Collection<ClientProductDTO> products;
 
 	public Long getId() {
 		return id;
