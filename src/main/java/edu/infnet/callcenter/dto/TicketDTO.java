@@ -10,12 +10,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tickets")
+@Table(name = "tickets")
 public class TicketDTO {
 
 	@Id
 	@GeneratedValue
 	private Long id;
+
 	private Long user_id;
 	private Long serial_number;
 	private String status;
@@ -44,6 +45,10 @@ public class TicketDTO {
 		this.updated_at = updated_at;
 	}
 
+	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private UserDTO users;
+
 	public Long getId() {
 		return id;
 	}
@@ -56,61 +61,39 @@ public class TicketDTO {
 		return user_id;
 	}
 
-
-
 	public Long getSerial_number() {
 		return serial_number;
 	}
-
-
 
 	public String getStatus() {
 		return status;
 	}
 
-
 	public String getClient_name() {
 		return client_name;
 	}
-
-
 
 	public String getBriefing() {
 		return briefing;
 	}
 
-
 	public String getError_code() {
 		return error_code;
 	}
-
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
-
 	public Boolean getFinished() {
 		return finished;
 	}
-
-
 
 	public Timestamp getCreated_at() {
 		return created_at;
 	}
 
-
-
 	public Timestamp getUpdated_at() {
 		return updated_at;
 	}
-
-
-
-	@ManyToOne(optional=true, fetch=FetchType.LAZY)
-	@JoinColumn(name="user_id", referencedColumnName="id", insertable=false, updatable=false)
-	private UserDTO users;
 }
