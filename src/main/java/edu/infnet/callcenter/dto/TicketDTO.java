@@ -37,6 +37,19 @@ public class TicketDTO {
 
 	}
 
+	public TicketDTO(Long serial_number, StatusEnum status, String client_name, String briefing, String error_code,
+			String description, Boolean finished, Timestamp created_at, Timestamp updated_at) {
+		this.serial_number = serial_number;
+		this.status = status;
+		this.client_name = client_name;
+		this.briefing = briefing;
+		this.error_code = error_code;
+		this.description = description;
+		this.finished = finished;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
+	}
+
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private UserDTO users;
@@ -51,6 +64,10 @@ public class TicketDTO {
 
 	public Long getUser_id() {
 		return user_id;
+	}
+
+	public void setUser_id(Long id) {
+		this.user_id = id;
 	}
 
 	public Long getSerial_number() {
