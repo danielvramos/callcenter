@@ -57,7 +57,7 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<ProductDTO> deletProduct(@PathVariable Long id) {
+	public Optional<ProductDTO> deleteProduct(@PathVariable Long id) {
 		if (!productService.exists(id))
 			return null;
 
