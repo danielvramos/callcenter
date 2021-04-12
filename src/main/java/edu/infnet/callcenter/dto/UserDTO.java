@@ -12,12 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserDTO {
 
     @Id
     @GeneratedValue
     private Long id;
+
     private String name;
     private String cpf;
     private String email;
@@ -29,11 +30,20 @@ public class UserDTO {
 
     }
 
-    public UserDTO(String name, String cpf, String email, String type) {
+    public UserDTO(String name, String cpf, String email, String type, Timestamp created_at, Timestamp updated_at) {
         this.name = name;
         this.type = type;
         this.cpf = cpf;
         this.email = email;
+        this.created_at = created_at;
+		this.updated_at = updated_at;
+    }
+
+    @OneToMany(targetEntity = TicketDTO.class, mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TicketDTO> tickets = new ArrayList<>();
+
+    public List<TicketDTO> getTickets() {
+        return tickets;
     }
 
     public Long getId() {
@@ -60,10 +70,19 @@ public class UserDTO {
         return type;
     }
 
-	@OneToMany(targetEntity=TicketDTO.class, mappedBy="users", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    private List<TicketDTO> tickets = new ArrayList<>();
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
 
-    public List<TicketDTO> getTickets() {
-        return tickets;
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public Timestamp getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
 }
