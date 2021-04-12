@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import edu.infnet.callcenter.Enum.StatusEnum;
 import edu.infnet.callcenter.dto.TicketDTO;
@@ -30,6 +31,11 @@ public class TicketController {
 	@GetMapping("/solved")
 	public List<TicketDTO> getSolvedTickets() {
 		return ts.getBySolution(StatusEnum.CONSERTADO);
+	}
+
+	@GetMapping("/status")
+	public List<TicketDTO> getTicketsByStatus(@RequestParam StatusEnum status) {
+		return ts.getBySolution(status);
 	}
 
 	@PostMapping
