@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import edu.infnet.callcenter.Enum.StatusEnum;
 import edu.infnet.callcenter.dto.TicketDTO;
 import edu.infnet.callcenter.repository.TicketRepository;
@@ -26,7 +25,8 @@ public class TicketService {
 	public TicketDTO update(TicketDTO ticket, Long id) {
 		ticket.setId(id);
 
-		if(null == ticket.getUser_id()) return null;
+		if (null == ticket.getUser_id())
+			return null;
 
 		return tr.save(ticket);
 	}
@@ -45,8 +45,8 @@ public class TicketService {
 		return tr.existsById(id);
 	}
 
-	public List<TicketDTO> getBySolutions(StatusEnum consertado) {
-		
-		return tr.findAllByStatus(consertado);
+	public List<TicketDTO> getBySolution(StatusEnum status) {
+
+		return tr.findAllByStatus(status);
 	}
 }
