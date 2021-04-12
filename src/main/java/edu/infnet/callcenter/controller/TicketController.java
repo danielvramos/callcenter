@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.infnet.callcenter.Enum.StatusEnum;
 import edu.infnet.callcenter.dto.TicketDTO;
 import edu.infnet.callcenter.services.TicketService;
 
@@ -27,9 +28,15 @@ public class TicketController {
 	public List<TicketDTO> getTickets(){
 		return ts.getAll();
 	}
-
+	@GetMapping("/solved")
+	public List<TicketDTO> getTicketsSolution(){
+		return ts.getBySolutions(StatusEnum.CONSERTADO);
+	}
+	
+	
 	@PostMapping
 	public TicketDTO storeTicket(@RequestBody TicketDTO ticket) {
+		ticket.setStatus(StatusEnum.CADASTRADO);
 		return ts.save(ticket);
 	}
 
@@ -39,7 +46,15 @@ public class TicketController {
 
 		return ts.update(ticket, id);
 	}
-
+	
+	@PatchMapping("/{id_ticket}/{id_user}")
+	public TicketDTO addExpert(@RequestBody TicketDTO ticket, @PathVariable Long id_ticket, @PathVariable Long id_user) {
+		if(!ts.exists(id_ticket)) return null;
+		ticket.setStatus(StatusEnum.ATENDIMENTO);
+		ticket.setUser_id(id_user);
+		return ts.update(ticket, id_ticket);
+	}
+	
 	@GetMapping("/{id}")
 	public TicketDTO getTicket(@PathVariable Long id) {
 		Optional<TicketDTO> ticket = ts.getById(id);
